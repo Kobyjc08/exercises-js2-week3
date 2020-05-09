@@ -28,40 +28,82 @@ When the button is clicked
 - The field values should be used to create a new movie object literal
 - The new movie is then added to the list of movies and gets displayed on your page
 TIP: Use the functions you created on tasks 1-3
-
 ================
 */
-var movies = [
-  {
-    title: "Color Out of Space",
-    director: "Richard Stanley",
-    type: "sci-fi",
-    haveWatched: true,
-  },
-  {
-    title: "A Twelve-Year Night",
-    director: "Álvaro Brechner",
-    type: "horror",
-    haveWatched: false,
-  },
-  {
-    title: "The Whistlers",
-    director: "Corneliu Porumboiu",
-    type: "comedy",
-    haveWatched: true,
-  },
-  {
-    title: "The Invisible Man",
-    director: "Leigh Whannell",
-    type: "horror",
-    haveWatched: false,
-  },
+var setForm = document.querySelector("h1");
+var form = document.createElement("form");
+var fieldset = document.createElement("fieldset");
+var legend = document.createElement("legend");
+var label = document.createElement("label");
+var input = document.createElement("input");
+setForm.appendChild(form);
+form.appendChild(fieldset);
+fieldset.appendChild(legend);
+legend.appendChild(label);
+label.appendChild(input);
+legend.innerText = "Fill this form to add your movie";
+label.innerText = "title";
+input.setAttribute("type", "text");
+
+
+
+var movies = [{
+        title: "Color Out of Space",
+        director: "Richard Stanley",
+        type: "sci-fi",
+        haveWatched: true,
+    },
+    {
+        title: "A Twelve-Year Night",
+        director: "Álvaro Brechner",
+        type: "horror",
+        haveWatched: false,
+    },
+    {
+        title: "The Whistlers",
+        director: "Corneliu Porumboiu",
+        type: "comedy",
+        haveWatched: true,
+    },
+    {
+        title: "The Invisible Man",
+        director: "Leigh Whannell",
+        type: "horror",
+        haveWatched: false,
+    },
 ];
 
 // create showMovies function
+function showMovies(movies) {
+    var totalMovies = document.querySelector("#movies-number");
+    totalMovies.innerText = movies.length;
+    movies.forEach(movie => {
+        let p = document.createElement("p");
+        let movieList = document.querySelector("#all-movies");
+        movieList.appendChild(p);
+        p.innerText = movie.title + " - " + movie.director;
+
+    })
+}
 
 
 // create a new movie object for your favorite movie
+var myMovie = {
+    title: "The great Escape",
+    director: "Bob",
+    type: "war",
+    haveWatched: true,
+};
+
+
+function addMovie(movie, callback) {
+    setTimeout(() => {
+        movies.push(movie)
+        setTimeout(() => callback(movies), 1000)
+    }, 2000);
+}
+addMovie(myMovie, showMovies)
+
 
 
 // create addMovies function
